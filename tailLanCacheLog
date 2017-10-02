@@ -1,0 +1,8 @@
+# See what's happening in the LAN-Cache log. This is good for checking on the
+# status of a download and peer-seeding.
+
+# This one is good for Addigy's web shell:
+tail /Library/Addigy/logs/cache.log
+
+# If you have a more responsive shell, watch the log in live time:
+tail -f /Library/Addigy/logs/cache.log
