@@ -1,0 +1,3 @@
+NAME="Your ticket name"
+DESCRIPTION="Your ticket description"
+curl -X POST https://$(/Library/Addigy/go-agent agent realm).addigy.com/submit_ticket/ -H 'content-type: application/json' -d "{\"agentid\": \"$(/Library/Addigy/go-agent agent agentid)\", \"orgid\":\"$(/Library/Addigy/go-agent agent orgid)\", \"name\":\"${NAME}\", \"description\":\"${DESCRIPTION}\"}"
