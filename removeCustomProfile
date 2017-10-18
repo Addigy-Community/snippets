@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# For those times when things may have been installed various ways.
+
+profileIdentifier="com.example.your.identifier"
+
+OIFS=$IFS
+IFS=$'\n'
+
+if profiles -L | grep "$profileIdentifier" &> /dev/null; then
+    echo "removing $profileIdentifier for device"
+    sudo profiles -R -p $profileIdentifier
+else
+    echo "root does not have $profileIdentifier"
+fi
+
+
+for user in $(ls /Users); do
+    if id $user &> /dev/null; then
+        if profiles -L -U "$user" | grep "$profileIdentifier"; then
+            echo "removing $profileIdentifier for $user"
+            profiles -R -U $user -p $profileIdentifier
+        else
+            echo "$user does not have $profileIdentifier"
+        fi
+    else
+        echo "$user not a user"
+    fi
+done
+
+IFS=$OIFS
