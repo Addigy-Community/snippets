@@ -11,7 +11,7 @@ if profiles -L | grep "$profileIdentifier" &> /dev/null; then
     echo "removing $profileIdentifier for device"
     sudo profiles -R -p $profileIdentifier
 else
-    echo "root does not have $profileIdentifier"
+    echo "device does not have $profileIdentifier"
 fi
 
 
