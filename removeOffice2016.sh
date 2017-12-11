@@ -37,18 +37,18 @@ printlog() {
 
     if [[ "$1" == "-r" ]]; then
         shift
-        logger -is -p local3.info -t ${LOG_TAG} "$*" 2>> ${TEMP_LOG}
+        logger -is -p local3.info -t "${LOG_TAG}" "$*" 2>> ${TEMP_LOG}
         printf "${RED}$*${NC}\n"
     elif [[ "$1" == "-y" ]]; then
         shift
-        logger -is -p local3.info -t ${LOG_TAG} "$*" 2>> ${TEMP_LOG}
+        logger -is -p local3.info -t "${LOG_TAG}" "$*" 2>> ${TEMP_LOG}
         printf "${YELLOW}$*${NC}\n"
     elif [[ "$1" == "-g" ]]; then
         shift
-        logger -is -p local3.info -t ${LOG_TAG} "$*" 2>> ${TEMP_LOG}
+        logger -is -p local3.info -t "${LOG_TAG}" "$*" 2>> ${TEMP_LOG}
         printf "${GREEN}$*${NC}\n"
     else
-        logger -is -p local3.info -t ${LOG_TAG} "$*" 2>> ${TEMP_LOG}
+        logger -is -p local3.info -t "${LOG_TAG}" "$*" 2>> ${TEMP_LOG}
         printf "$*\n"
     fi
 }
@@ -57,10 +57,10 @@ finalizelog() {
     cat ${TEMP_LOG} >> ${LOG_FILE}
     rm ${TEMP_LOG}
     if [[ -e "${TEMP_LOG}" ]]; then
-        logger -is -p local3.info -t ${LOG_TAG} "Removal of ${TEMP_LOG} failed." 2>> ${LOG_FILE}
+        logger -is -p local3.info -t "${LOG_TAG}" "Removal of ${TEMP_LOG} failed." 2>> ${LOG_FILE}
         return 1
     else
-        logger -is -p local3.info -t ${LOG_TAG} "Removal of ${TEMP_LOG} succeeded." 2>> ${LOG_FILE}
+        logger -is -p local3.info -t "${LOG_TAG}" "Removal of ${TEMP_LOG} succeeded." 2>> ${LOG_FILE}
         return 1
     fi
 }
@@ -105,8 +105,8 @@ fi
 cd "/private/tmp"
 
 # Make TEMP_LOG accesible to all Users
-touch ${TEMP_LOG}
-chmod 666 ${TEMP_LOG}
+touch "${TEMP_LOG}"
+chmod 666 "${TEMP_LOG}"
 
 # Remove Application Bundles
 
