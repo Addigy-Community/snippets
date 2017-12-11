@@ -10,10 +10,15 @@ export TODAY=$(date +"%Y-%m-%d")
 
 backup() {
     if [[ -e "${1}" ]]; then
-        cp "${1}" "${1}.${TODAY}.bak"
+        rsync -aE "${1}" "${1}.${TODAY}.bak"
         if [[ -e "${1}.${TODAY}.bak" ]]; then
-            printlog -g "Backup of '${1}' succeeded."
-            return 0
+            if [[ "$(shasum "${1}" | awk '{ print $1 }')" == "$(shasum "${1}.${TODAY}.bak" | awk '{ print $1 }')" ]]; then
+                printlog -g "Backup of '${1}' succeeded."
+                return 0
+            else
+                printlog -r "Backup of '${1}' failed."
+                return 1
+            fi
         else
             printlog -r "Backup of '${1}' failed."
             return 1
