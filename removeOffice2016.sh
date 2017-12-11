@@ -5,7 +5,7 @@
 
 export LOG_FILE="/Library/Logs/Microsoft/Office2016-uninstall.log"
 export TEMP_LOG="/private/tmp/$(basename ${LOG_FILE})"
-export LOG_TAG="Office 2016 Uninstaller"
+export LOG_TAG="Office2016Uninstaller"
 export TODAY=$(date +"%Y-%m-%d")
 
 backup() {
