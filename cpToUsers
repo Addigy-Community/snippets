@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Copy the following function into an install script to copy a given file to
+# each user in on a macOS computer.
+
+# Usage: cpToUsers source_file target_relative_to_home
+
+cpToUsers(){
+  local IFS=$'\n'
+
+  for USER in $(/usr/bin/dscl . list /Users UniqueID | /usr/bin/awk '$2 >= 500 {print $1}'); do
+    HOME_DIR=$(/usr/bin/dscacheutil -q user -a name $USER | /usr/bin/grep -E '^dir: ' | /usr/bin/awk '{ print $2 }')
+    /bin/cp "$1" "${HOME_DIR}/$2"
+    /usr/sbin/chown $USER "${HOME_DIR}/$2"
+  done
+}
