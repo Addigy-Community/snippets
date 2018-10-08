@@ -1,0 +1,15 @@
+#!/bin/bash
+
+NEW_HOSTNAME="<NEW_COMPUTER_NAME_HERE>"
+
+/usr/sbin/scutil --set ComputerName "$NEW_HOSTNAME"
+/usr/sbin/scutil --set HostName "$NEW_HOSTNAME"
+/usr/sbin/scutil --set LocalHostName "$NEW_HOSTNAME"
+/usr/bin/dscacheutil -flushcache
+
+/usr/bin/printf "ComputerName='%s'\n" "$(/usr/sbin/scutil --get ComputerName)"
+/usr/bin/printf "HostName='%s'\n" "$(/usr/sbin/scutil --get HostName)"
+/usr/bin/printf "LocalHostName='%s'\n" "$(/usr/sbin/scutil --get LocalHostName)"
+
+/Library/Addigy/collector
+/Library/Addigy/auditor
